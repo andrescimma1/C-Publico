@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1591478860 source:c:\users\user\desktop\cimma\c-publico\dinamica1\main.c
+	<stdio.h>
+	<stdlib.h>
+

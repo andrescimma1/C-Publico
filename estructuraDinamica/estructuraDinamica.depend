@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1591479467 source:c:\users\user\desktop\cimma\c-publico\estructuradinamica\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

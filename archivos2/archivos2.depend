@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1592153388 source:c:\users\user\desktop\cimma\c-publico\archivos2\main.c
+	<stdio.h>
+	<stdlib.h>
+

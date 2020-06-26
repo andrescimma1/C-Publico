@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1593210528 source:c:\users\user\desktop\ejercicioll\c-publico\ejemploll\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+
+1593210544 c:\users\user\desktop\ejercicioll\c-publico\ejemploll\linkedlist.h
+
+1593210562 source:c:\users\user\desktop\ejercicioll\c-publico\ejemploll\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+

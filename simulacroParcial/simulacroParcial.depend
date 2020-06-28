@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1593287566 source:c:\users\user\desktop\cimma\c-publico\simulacroparcial\linkedlist.c
+1593372571 source:c:\users\user\desktop\cimma\c-publico\simulacroparcial\linkedlist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"LinkedList.h"
 
-1593287566 c:\users\user\desktop\cimma\c-publico\simulacroparcial\linkedlist.h
+1593372571 c:\users\user\desktop\cimma\c-publico\simulacroparcial\linkedlist.h
 
-1593306334 source:c:\users\user\desktop\cimma\c-publico\simulacroparcial\main.c
+1593375212 source:c:\users\user\desktop\cimma\c-publico\simulacroparcial\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

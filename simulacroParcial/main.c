@@ -46,6 +46,8 @@ int menu();
 void cantidadTotalPasajeros(LinkedList* lista);
 void cantidadPasajerosIrlanda(LinkedList* lista);
 void vuelosAPortugal(LinkedList* lista, LinkedList* listaPilotos);
+int filtrarxVuelosCortos(void* unAvion);
+int filtrarSinAlexLifeson(void* unAvion);
 
 
 int main()
@@ -108,6 +110,9 @@ int main()
 
     lista = ll_newLinkedList();
 
+    LinkedList* listaVuelosCortos;
+    LinkedList* listaAlexLifeson;
+
     do
     {
         switch(menu())
@@ -132,12 +137,21 @@ int main()
             case 4: cantidadPasajerosIrlanda(lista);
                     break;
 
-            case 5: break;
+            case 5: listaVuelosCortos = ll_newLinkedList();
+                    listaVuelosCortos = ll_filter(lista, filtrarxVuelosCortos);
+                    mostrarAviones(listaVuelosCortos, listaPilotos);
+                    controller_saveAsText("VuelosCortos.csv", listaVuelosCortos);
+                    break;
 
             case 6: vuelosAPortugal(lista, listaPilotos);
                     break;
 
-            case 7: break;
+            case 7: listaAlexLifeson = ll_newLinkedList();
+                    listaAlexLifeson = ll_filter(lista, filtrarSinAlexLifeson);
+                    mostrarAviones(listaAlexLifeson, listaPilotos);
+                    controller_saveAsText("VuelosSinAlex.csv", listaAlexLifeson);
+                    printf("\nNo te queremos Alex!\n\n");
+                    break;
 
             case 8: printf("Seguro que desea salir? s/n: ");
                     fflush(stdin);
@@ -152,6 +166,8 @@ int main()
 
     ll_deleteLinkedList(lista);
     ll_deleteLinkedList(listaPilotos);
+    ll_deleteLinkedList(listaVuelosCortos);
+    ll_deleteLinkedList(listaAlexLifeson);
 
     return 0;
 }
@@ -195,7 +211,37 @@ int controller_loadFromText(char* path , LinkedList* pArrayListAvion)
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListAvion)
 {
+    int r = 1;
+    int tam = ll_len(pArrayListAvion);
+    FILE* f;
+    eAvion* auxAvion;
 
+    f = fopen(path, "w");
+
+    if(f == NULL)
+    {
+        printf("Error al abrir el archivo\n\n");
+    }
+    else
+    {
+        fprintf(f, "idVuelo,idAvion,idPiloto,fecha,destino,cantPasajeros,horaDespegue,horaLlegada\n");
+
+        for(int i=0; i<tam; i++)
+        {
+            auxAvion = (eAvion*)ll_get(pArrayListAvion, i);
+            fprintf(f, "%d,%d,%d,%d/%d/%d,%s,%d,%d,%d\n", auxAvion->idVuelo, auxAvion->idAvion, auxAvion->idPiloto, auxAvion->dia, auxAvion->mes, auxAvion->anio, auxAvion->destino, auxAvion->cantPasajeros, auxAvion->horaDespegue, auxAvion->horaLlegada);
+            r = 1;
+        }
+    }
+
+    if(r == 1)
+    {
+        printf("Se han guardado con exito!!\n\n");
+    }
+
+    fclose(f);
+
+    return r;
 }
 
 
@@ -736,4 +782,44 @@ void vuelosAPortugal(LinkedList* lista, LinkedList* listaPilotos)
     {
         printf("Error al listar\n\n");
     }
+}
+
+
+
+int filtrarxVuelosCortos(void* unAvion)
+{
+    int auxReturn = 0;
+    eAvion* x;
+
+    if(unAvion != NULL)
+    {
+        x = (eAvion*)unAvion;
+
+        if((x->horaDespegue + 1) == x->horaLlegada || (x->horaDespegue + 2) == x->horaLlegada || (x->horaDespegue + 3) == x->horaLlegada)
+        {
+            auxReturn = 1;
+        }
+    }
+
+    return auxReturn;
+}
+
+
+
+int filtrarSinAlexLifeson(void* unAvion)
+{
+    int auxReturn = 0;
+    eAvion* x;
+
+    if(unAvion != NULL)
+    {
+        x = (eAvion*)unAvion;
+
+        if(x->idPiloto != 1)
+        {
+            auxReturn = 1;
+        }
+    }
+
+    return auxReturn;
 }
